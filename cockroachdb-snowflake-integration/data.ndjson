@@ -1,0 +1,5 @@
+{"after": {"customer_id": "01220b4f-1030-4b02-87f4-26d2f35e7300", "id": "a988d1de-10c4-4391-ac5e-099fcdeba867", "total": 0.99, "ts": "2024-07-17T10:27:18.973957Z"}, "key": ["a988d1de-10c4-4391-ac5e-099fcdeba867"]}
+{"after": {"customer_id": "39e80ca6-6765-4b1a-8857-370896d1b878", "id": "8ed39a4e-c538-41f8-a138-3acf9c1cd18b", "total": 1.99, "ts": "2024-07-17T10:27:18.989969Z"}, "key": ["8ed39a4e-c538-41f8-a138-3acf9c1cd18b"]}
+{"after": {"customer_id": "c4577c12-7b83-4079-a969-2760ea0b1006", "id": "e1085bfd-9b08-4e35-8ebc-1e454f292574", "total": 10.98, "ts": "2024-07-17T10:27:19.002085Z"}, "key": ["e1085bfd-9b08-4e35-8ebc-1e454f292574"]}
+{"after": {"customer_id": "199ed7ff-6108-461e-92ea-280e0981b945", "id": "b5155eba-c0f4-4afa-89f6-de6299ca6972", "total": 20.97, "ts": "2024-07-17T10:27:19.010935Z"}, "key": ["b5155eba-c0f4-4afa-89f6-de6299ca6972"]}
+{"after": {"customer_id": "a269b37f-ea0c-4201-8008-ba73a3aedfa6", "id": "cd90bd91-f96f-4602-8bfe-e7c241877942", "total": 50.00, "ts": "2024-07-17T10:27:19.020401Z"}, "key": ["cd90bd91-f96f-4602-8bfe-e7c241877942"]}
