@@ -104,6 +104,10 @@ provider "aws" {
 #   bucket = "test-bucket"
 # }
 
-resource "aws_sqs_queue" "test-queue" {
-  name = "test-queue"
+# resource "aws_sqs_queue" "test-queue" {
+#   name = "test-queue"
+# }
+
+resource "aws_sns_topic" "test-topic" {
+  name = "test-topic"
 }
