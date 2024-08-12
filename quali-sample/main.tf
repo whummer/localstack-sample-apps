@@ -108,6 +108,11 @@ provider "aws" {
 #   name = "test-queue"
 # }
 
+variable "topic-name" {
+    type = string
+    default = "test-topic"
+}
+
 resource "aws_sns_topic" "test-topic" {
-  name = "test-topic"
+  name = var.topic-name
 }
