@@ -1,11 +1,14 @@
 #!/bin/bash
 
+# deploy the terraform stack (S3 bucket, SQS queue, bucket notification)
 tflocal init
 rm -f terraform.tfstate*
 tflocal apply -auto-approve
 
+# create order_alerts table in Snowflake
 snow_sql.sh "CREATE TABLE order_alerts (changefeed_record VARIANT)"
 
+# create stage connected to our S3 bucket
 snow_sql.sh "
 CREATE STAGE cdc_stage
   ENDPOINT = 'http://localhost:4566'
@@ -19,6 +22,7 @@ CREATE STAGE cdc_stage
   )
 "
 
+# create Snow pipe to copy data from S3 into the `order_alerts` table
 snow_sql.sh "
 CREATE PIPE cdc_pipe
   AUTO_INGEST = TRUE
@@ -28,22 +32,9 @@ CREATE PIPE cdc_pipe
   FILE_FORMAT = (TYPE = 'JSON')
 "
 
-#awslocal s3 mb s3://crdb-to-snowflake-cdc-demo
-
-# add bucket notification, to inform Snowflake about new files on S3
-# see https://docs.snowflake.com/en/user-guide/data-load-snowpipe-auto-s3#determining-the-correct-option
-#awslocal s3api put-bucket-notification-configuration --bucket crdb-to-snowflake-cdc-demo \
-#  --notification-configuration '{
-#    "QueueConfigurations": [{"Id": "c1", "QueueArn": "arn:aws:sqs:us-east-1:000000000000:sf-snowpipe-test", "Events": ["s3:ObjectCreated:*"]}],
-#    "EventBridgeConfiguration": {}
-#  }'
-
+# copy a file to S3, triggering the pipe execution
 awslocal s3 cp data.ndjson s3://crdb-to-snowflake-cdc-demo/
 
+# sleep a bit, then select data from the table
 sleep 3
 snow_sql.sh "SELECT * FROM order_alerts"
-
-#snow_sql.sh "COPY INTO order_alerts FROM @cdc_stage"
-#snow_sql.sh "SELECT * FROM order_alerts"
-
-snow_sql.sh "SHOW PIPES"
